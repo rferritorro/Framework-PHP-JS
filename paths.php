@@ -1,7 +1,7 @@
 <?php
 #Define root path
+    define('Project','/Proyecto_V.4-RafaFerri/');
     define('ROOT',$_SERVER['DOCUMENT_ROOT'] . Project);
-    define('Project','/Proyecto_V.3-RafaFerri/');
 #Define localhost path
     define('LC', 'http://' . $_SERVER['HTTP_HOST'] . Project);
 
@@ -103,7 +103,7 @@
         #img
         define('View_img', View . 'img');
         #inc
-        define('View_inc', View . 'inc');
+        define('View_inc', View . 'inc/');
         #js
         define('View_js', View . 'js');
         #lang
