@@ -12,26 +12,26 @@
     define('Module', ROOT . 'module/');
 
     #Define home module path
-    define('Module_home', ROOT . 'home/');
+    define('Module_home', Module . 'home/');
 
         #Define all folders into home
             #controller
-            define('Home_controller', Module_home . 'controller');
+            define('Home_controller', Module_home . 'controller/');
             
             #model
-            define('Home_model', Module_home . 'model');
+            define('Home_model', Module_home . 'model/');
 
             #resources
-            define('Home_resources', Module_home . 'resources');
+            define('Home_resources', Module_home . 'resources/');
 
             #view
-            define('Home_view', Module_home . 'view');
+            define('Home_view', Module_home . 'view/');
 
                 #Define js path of view
                 define('Home_js', LC . 'module/home/view/js/');
 
     #Define shop module path
-    define('Module_shop', ROOT . 'shop/');
+    define('Module_shop', Module . 'shop/');
 
       #Define all folders into shop
             #controller
@@ -50,7 +50,7 @@
                 define('Shop_js', LC . 'module/shop/view/js/');
 
     #Define contact module path
-    define('Module_contact', ROOT . 'contact/');
+    define('Module_contact', Module . 'contact/');
     
          #Define all folders into contact
             #controller
@@ -69,7 +69,7 @@
                 define('Contact_js', LC . 'module/contact/view/js/');
 
     #Define search module path
-    define('Module_search', ROOT . 'search/');
+    define('Module_search', Module . 'search/');
 
     #Define all folders into search
             #controller
@@ -111,4 +111,6 @@
         #scss
         define('View_scss', View . 'scss');
 
+#Allow friendly url
 
+define('URL_FRIENDLY', TRUE);

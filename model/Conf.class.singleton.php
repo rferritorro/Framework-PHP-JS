@@ -26,19 +26,19 @@
         }
 
         public function getuser() {
-            $user = $this->$db_user;
+            $user = $this->db_user;
             return $user;
         }
         public function getpassw() {
-            $passw = $this->$db_passw;
+            $passw = $this->db_passw;
             return $passw;
         }
         public function gethost() {
-            $host = $this->$db_host;
+            $host = $this->db_host;
             return $host;
         }
         public function getdb() {
-            $db = $this->$db;
+            $db = $this->db;
             return $db;
         }
     }

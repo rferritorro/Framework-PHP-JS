@@ -11,17 +11,17 @@
         private $array;
         static $_instance;
     
-    private function __constructor() {
+    private function __construct() {
         $this->SetConection();
+        $this->conectar();
     }
     #Create functinos to access database
     private function SetConection() {
-        require_once('Conf.class.singleton.php');
+        require_once 'Conf.class.singleton.php';
 
         #We need to create a new instance
         $conf =  Conf::getInstance();
         #Later,save the information
-
         $this->user = $conf->getuser();
         $this->password = $conf->getpassw();
         $this->host = $conf->gethost();
@@ -57,5 +57,5 @@
         }
         return $this->array;
     }
-    }
+}
     

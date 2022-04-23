@@ -35,17 +35,20 @@
         }
 
         function routingStart() {
-            #Now, I start to create the module and functions,if can't be possible,so it will show error
+            #Now, I start to create the module and functions,if can't be possible,so it will    show error
             try {
-                call_user_func(array($this -> loadModule(), $this -> loadFunction()));
+                call_user_func(array($this->loadModule(), $this->loadFunction()));
             }catch(Exception $e) {
+                #If there is some error, I show the error page
                 common::load_error();
             }
         }
 
         private function loadModule() {
+            #Check if the folder exist
             if (file_exists('resources/modules.xml')) {
                 $modules = simplexml_load_file('resources/modules.xml');
+                #if the folder exist,it start to check all parts of xml
                 foreach ($modules as $row) {
                     if (in_array($this -> uriModule, (Array) $row -> uri)) {
                         $path = Module . $row -> name . '/controller/controller_' . (String) $row -> name . '.class.php';
@@ -53,6 +56,7 @@
                             require_once($path);
                             $controllerName = 'controller_' . (String) $row -> name;
                             $this -> nameModule = (String) $row -> name;
+                            #Return the name of controller for creating
                             return new $controllerName;
                         }
                     }
@@ -61,7 +65,7 @@
             throw new Exception('Not Module found.');
         }
         private function loadFunction() {
-            $path = Module . $this -> nameModule . '/resources/function.xml'; 
+            $path = Module . $this -> nameModule . '/resources/function.xml';
             if (file_exists($path)) {
                 $functions = simplexml_load_file($path);
                 foreach ($functions as $row) {

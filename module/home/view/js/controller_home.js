@@ -1,7 +1,6 @@
-// 
 function loadSlider() {
-   ajaxPromise('home/controller/controller_home.php?option=slider_home', 
-    'GET', 'JSON')
+   ajaxPromise(friendlyURL('?page=home&op=carousel'),
+    'POST', 'JSON')
     .then(function(data) {
       for (row in data) {
         $('<img style="height:300px" class="image_brand_car" id="brand-'+data[row].brand+'" src="'+data[row].img+'" data-id="'+data[row].brand+'"/>').appendTo('#slider_home_brand');
@@ -32,30 +31,32 @@ function loadSlider() {
             }
           ]
         });
-  }).catch(function() {
-    window.location.href = "index.php?exceptions=controller&option=503";
+  }).catch(function(info) {
+    //window.location.href = "index.php?exceptions=controller&option=503";
+    console.log(info);
   });
 
 }
 function loadfiltertypes() {
-    ajaxPromise('home/controller/controller_home.php?option=buttons_home', 
-    'GET', 'JSON')
+    ajaxPromise(friendlyURL('?page=home&op=tipos'), 
+    'POST', 'JSON')
     .then(function(data) {
       for (row in data) {
         $('<div></div>').attr('id',data[row].nom).appendTo('#types_buttons');
         $('<img id="image-type-'+data[row].id+'" style="height:100px" class="image-type" src="'+data[row].img+'" data-id="'+data[row].id+'"/>').appendTo('#'+data[row].nom);
         $('<h2>'+data[row].nom+'</h2>').appendTo('#'+data[row].nom);
       }
-  }).catch(function() {
-    window.location.href = "index.php?exceptions=controller&option=503";
+  }).catch(function(info) {
+    // window.location.href = "index.php?exceptions=controller&option=503";
+    console.log(info);
 
   });
 
 }
 
 function loadfilterbuttons() {
-    ajaxPromise('home/controller/controller_home.php?option=categories_menu', 
-  'GET', 'JSON')
+    ajaxPromise(friendlyURL('?page=home&op=categorias'), 
+  'POST', 'JSON')
   .then(function(data) {
     for (row in data) {
       $('<div></div>').attr('id',data[row].nom).appendTo('#categories_buttons');
@@ -63,9 +64,9 @@ function loadfilterbuttons() {
       $('<h2>'+data[row].nom+'</h2>').appendTo('#'+data[row].nom);
     }
   }).catch(function() {
-  window.location.href = "index.php?exceptions=controller&option=503";
-
-  });
+  // window.location.href = "index.php?exceptions=controller&option=503";
+  console.log(info);
+});
 
 }
 function charge_filter_home() {
