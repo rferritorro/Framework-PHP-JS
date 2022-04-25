@@ -37,14 +37,36 @@
                         <span><i class="fas fa-address-book fa-3x"></i></span>
                     </a>
                 </li>
+                <li class="space">
+                </li>
+                <li class="search_menu">
+                    <div class="filters_header"  style="width: 100%;">
+                        <div class="search_line">
+                            <i class="fas fa-gas-pump fa-2x"></i>
+                            <select id="select_type_header">
+                                <option value="0">--</option>
+                            </select>
+                        </div>
+                        <div class="search_line">
+                            <i class="fas fa-car fa-2x"></i>
+                            <select id="select_brand_header">
+                                <option value="0">--</option>
+                            </select>
+                        </div>
+                        <div class="search_line">
+                            <div class="search__input">
+                                <input type="text" id="autocom" maxlength="20" style="width: 350px;" autocomplete="off"/>
+                                <div id="search_auto" style="background-color: white;opacity: 0.8;color: black;z-index: 102;position: fixed;width: 400px"></div>
+                            </div>
+                            <button class="send_information_header"><i class="fas fa-search fa-2x"></i></button>
+                        </div>
+                    </div>  
+                </li>
             </ul>
-                    <?php
-                    // include("search/view/search.html");
-                    ?>
             </nav>
             <!-- menu -->
             
-        </div>
+    </div>
     <div id="panel_register" hidden>
         <span id="user_login_close"><i class="fas fa-window-close fa-2x"></i></span>
         <img id="img_logo" style="position:absolute;top:-27%;right:13%" src="./view/img/Logotipo500x500px.png"></img>

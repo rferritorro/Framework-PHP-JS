@@ -19,7 +19,9 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 		<script src="https://kit.fontawesome.com/ac5f7e1d46.js" crossorigin="anonymous"></script>
-		<script src="<?php echo LC ?>module/home/view/js/controller_home.js"></script>
+		<script src="<?php echo LC ?>module/home/view/js/home.js"></script>
+		<script src="<?php echo LC ?>module/search/view/js/search.js"></script>
+		
 		<script src="<?php echo LC ?>view/js/main.js"></script>
 		
 		<script src="<?php echo LC ?>utils/slick-1.8.1/slick/slick.js"></script>

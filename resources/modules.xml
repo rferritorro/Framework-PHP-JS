@@ -4,14 +4,15 @@
         <name>home</name>
         <uri>home</uri>
     </module>
+     <module>
+        <name>search</name>
+        <uri>search</uri>
+    </module>
     <!-- <module>
         <name>shop</name>
         <uri>tenda</uri>
     </module>
-    <module>
-        <name>search</name>
-        <uri>search</uri>
-    </module>
+   
     <module>
         <name>contact</name>
         <uri>contact</uri>

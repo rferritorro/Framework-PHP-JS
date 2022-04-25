@@ -33,8 +33,13 @@ p {
   list-style: none;
   margin-left: 5px;
   transform: skewX(-30deg);
-
 }
+.container ul li.search_menu {
+  list-style: none;
+  margin-left: 5px;
+  width: 90%;
+}
+
 .container ul li a {
   background-color: black;
   padding: 15px 35px;
@@ -46,7 +51,7 @@ p {
   padding: 0px 35px;
   display: block;
 }
-.container ul li a span i ,.container ul li.logo img{
+.container ul li a span i ,.container ul li.logo img,.container ul li.search_menu div div {
   transform: skewX(30deg);
 }
 
