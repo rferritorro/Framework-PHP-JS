@@ -23,12 +23,12 @@
                     <img style="width:100px;height:100px" src="./view/img/logo_autoshell.png"></img>   
                 </li>
                 <li class="button_menu">
-                    <a href="index.php?module=home&option=list">
+                    <a href="?page=home&op=view">
                         <span><i class="fas fa-home fa-3x"></i></span>
                     </a>
                 </li>
                 <li class="button_menu">
-                    <a href="index.php?module=shop&option=list">
+                    <a href="?page=shop&op=view">
                         <span><i class="fas fa-car fa-3x"></i></span>
                     </a>
                 </li>

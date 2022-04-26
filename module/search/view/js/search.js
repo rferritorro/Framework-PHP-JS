@@ -102,7 +102,7 @@ function send_information() {
         }
         localStorage.setItem('filtro_research',JSON.stringify(filtro));
         
-        window.location.href= "index.php?module=shop&option=list";
+        window.location.href= "?page=shop&op=view";
 
     });
 }

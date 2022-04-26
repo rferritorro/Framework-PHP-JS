@@ -49,6 +49,11 @@
         return $this->play;
     }
 
+    public function obj($sql) {
+        $this->play = $this->conection->query($sql)->fetch_object();
+        $this->play =get_object_vars($this->play);
+        return $this->play;
+    }
     #QUery for play a SELECT
     public function listar($play) {
         $this->array = array();

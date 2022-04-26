@@ -8,11 +8,11 @@
         <name>search</name>
         <uri>search</uri>
     </module>
-    <!-- <module>
+    <module>
         <name>shop</name>
-        <uri>tenda</uri>
+        <uri>shop</uri>
     </module>
-   
+    <!-- 
     <module>
         <name>contact</name>
         <uri>contact</uri>
