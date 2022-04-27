@@ -4,4 +4,8 @@
         <name>view</name>
         <uri>view</uri>
     </function>
+    <function>
+        <name>email</name>
+        <uri>sendemail</uri>
+    </function>
 </functions>

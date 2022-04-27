@@ -140,7 +140,7 @@ function create_news(array,offset,limit) {
 }
 function reload_shop(filtro) {
   localStorage.setItem('filtro_research',JSON.stringify(filtro));
-  window.location.href= "index.php?module=shop&option=list";
+  window.location.href= "?page=shop&op=view";
 }
 function redirect_news() {
   $(document).on('click','.box_new',function () {

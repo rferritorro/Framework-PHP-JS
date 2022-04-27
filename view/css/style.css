@@ -28,6 +28,7 @@ p {
   display: inline-flex;
   flex-wrap: wrap;
   margin-top: 5%;
+  width: 125%;
 }
 .container ul li {
   list-style: none;
@@ -89,6 +90,38 @@ div#header_options span#logger,div#header_options span#logger_out{
   height: 150px;
 }
 /* style-rafa */
+li.space {
+  width: 5%;
+}
+
+li.search_inputs {
+  background-color: transparent;
+  padding: 0px;
+  width: 12%;
+}
+
+li.search_inputs_text {
+  width: 33%;
+  padding: 0.5%;
+}
+
+li.search_inputs_text input{
+  font-size: 20px;
+}
+
+li.search_inputs_text button{
+  transform: skewX(30deg);
+
+}
+
+li.search_inputs select {
+  font-size: 20px;
+
+}
+li.search_inputs i, li.search_inputs select , li.search_inputs_text input {
+  transform: skewX(30deg);
+
+}
 #slider_home_brand {
   width: 70%;
   position: relative;
@@ -219,8 +252,8 @@ border: 2px solid white;
   background-color: transparent;
   border: none;
   position: absolute;
-  bottom: 5%;
-  right: 5%;
+  bottom: 3%;
+  right: 2%;
 }
 
 #all_shop  div.row.g-0 div img.img_bodywork,#filters div#bodywork img.img_bodywork_2 {
@@ -321,23 +354,45 @@ div#filters div label#text{
   padding: 0%;
   margin-left: 5%;
   font-weight: 900;
+  color: black;
+  margin-top: 2%;
+  font-size: 25px;
 }
 
 div#filters div select {
   width: 50%;
   margin: 5%;
+  font-size: 20px;
+
 }
 div#filters div input {
   border: none;
   border-bottom: 2px solid black;
   background-color: white;
   margin-left: 5%;
+  width: 50%;
+  font-size: 20px;
+
 }
 div#filters button {
   width: 100%;
   position: absolute;
   bottom: -5%;
   font-size: 35px;
+}
+div.card-body {
+  height: 50%;
+}
+button.button_redirect {
+  position: absolute;
+  bottom: 3%;
+  right: -2%;
+}
+div.card-body i#like {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  padding: 2%;
 }
 div#map_cars {
   width: 25%;
@@ -347,7 +402,10 @@ div#map_cars {
   margin: 5%;
 
 }
-
+div#navegator {
+  text-align: center;
+  width: 80%;
+}
 div.search_line {
   display: inline-flex;
   background-color: white;

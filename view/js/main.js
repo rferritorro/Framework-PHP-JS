@@ -34,7 +34,7 @@ function friendlyURL(url) {
         	link +=  "/"+aux[1];
         }
     }
-    //return "http://localhost/Proyecto_V.4-RafaFerri" + link;
+    // return "http://localhost/Proyecto_V.4-RafaFerri" + link;
     return "http://192.168.1.32/Proyecto_V.4-RafaFerri" + link;
 
 }

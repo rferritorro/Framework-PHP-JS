@@ -56,9 +56,6 @@
             #controller
             define('Contact_controller', Module_contact . 'controller');
             
-            #model
-            define('Contact_model', Module_contact . 'model');
-
             #resources
             define('Contact_resources', Module_contact . 'resources');
 
