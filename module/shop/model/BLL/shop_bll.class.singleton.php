@@ -37,7 +37,10 @@
         public function get_detail_BLL($args) {
             return $this -> dao -> select_detail_car($this->db,$args[0]);
         }
-
+		
+		public function get_count_BLL() {
+            return $this -> dao -> select_count($this->db);
+        }
         public function get_redirect_BLL($args) {
             return $this -> dao -> select_redirect($this->db,$args[0]);
         }

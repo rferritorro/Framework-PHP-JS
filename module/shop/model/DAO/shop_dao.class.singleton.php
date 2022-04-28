@@ -64,7 +64,8 @@
             $sql = "SELECT id,img FROM img_cars WHERE id_car='$id'";
             $stmt = $db->ejecutar($sql);
 
-            $row_select = mysqli_affected_rows($GLOBALS["conn"]);
+            $row_select = $stmt->num_rows;
+
 
             if ($row_select < 1) {
                 $occur[1] = [-1,"view/img/img_cars/dummies_not_available.jpeg"];
@@ -163,5 +164,10 @@
                 $sql = $sql. $order;
                 $stmt = $db->ejecutar($sql);
                 return $db->listar($stmt);
+        }
+        function select_count($db) {
+            $sql = "SELECT COUNT(*) count FROM cars";
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
         }
     }

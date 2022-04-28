@@ -16,7 +16,11 @@
         <name>detalle_coche</name>
         <uri>detail_car</uri>
     </function>
-        <function>
+    <function>
+        <name>count</name>
+        <uri>count</uri>
+    </function>
+    <function>
         <name>redireccionamiento</name>
         <uri>redirect</uri>
     </function>

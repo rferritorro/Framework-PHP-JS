@@ -33,7 +33,11 @@ class shop_model {
         public function get_detail($args) {
             return $this -> bll -> get_detail_BLL($args);
         }
+        
+        public function get_count() {
+            return $this -> bll -> get_count_BLL();
 
+        }
         public function get_redirect($args) {
             return $this -> bll -> get_redirect_BLL($args);
 

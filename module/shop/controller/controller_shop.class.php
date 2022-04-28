@@ -22,6 +22,9 @@ class controller_shop {
         echo json_encode(common::load_model('shop_model', 'get_detail',[$_POST["id"]]));
     }
 
+    function count() {
+        echo json_encode(common::load_model('shop_model', 'get_count'));
+    }
     function redireccionamiento() {
         echo json_encode(common::load_model('shop_model', 'get_redirect',[$_POST["brand"]]));
     }

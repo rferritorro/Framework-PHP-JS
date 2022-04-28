@@ -203,10 +203,10 @@ function select_all_cars(index = 0) {
 function return_detail() {
     $(document).on('click','#return',function () {
         $('div#one_product').attr('hidden','true');
-        $('header').removeAttribute('hidden');
+        $('header')[0].removeAttribute('hidden');
         $('div#filters')[0].removeAttribute('hidden');
         $('div#map_cars')[0].removeAttribute('hidden');
-        
+        $('div#all_shop')[0].removeAttribute('hidden');
         $('body').css('background-color','black');
         $('body').css('background-image','');
         $('div#one_product').empty();
@@ -555,16 +555,19 @@ function button_pagination() {
             pag = 0;
             localStorage.setItem('pag',JSON.stringify(pag)); 
         }
-        ajaxPromise('shop/controller/controller_shop.php?option=count','POST','TEXT')
+        ajaxPromise(friendlyURL('?page=shop&op=count'),'POST','JSON')
             .then(function(data) {
+                console.log(data);
+                data = data[0].count;
                 pag = Number(pag)+5;
                 if (pag >= data) {
                     pag = data-(data-5);
                 }
                 localStorage.setItem('pag',JSON.stringify(pag));
                 select_all_cars(pag);            
-            }).catch(function() {
-                window.location.href = "index.php?exceptions=controller&option=503";
+            }).catch(function(info) {
+                // window.location.href = "index.php?exceptions=controller&option=503";
+                console.log(info);
             });   
     });
 }
