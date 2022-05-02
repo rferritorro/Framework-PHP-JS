@@ -16,9 +16,9 @@
         <name>contact</name>
         <uri>contact</uri>
     </module>
-    <!-- <module>
+    <module>
         <name>login</name>
         <uri>login</uri>
         <uri>register</uri>
-    </module> -->
+    </module>
 </modules>

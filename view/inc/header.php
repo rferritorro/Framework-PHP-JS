@@ -4,8 +4,7 @@
         <div class="spinner-border text-light" id="imgSpinner1" role="status" style="position:fixed;top:45%;right:55%" hidden>
             <span class="sr-only">Loading...</span>
         </div>
-            <div class="dark-bg">
-                <div id="header_options">
+         <div id="header_options">
                     <!-- <select id="language" is="ms-dropdown">
                             <option id="es" data-tr="Español" data-image="view/img/language_logo/spain-logo.png">Español</option>
                             <option id="ca" data-tr="Catalán" data-image="view/img/language_logo/catalán-logo.png">Catalán</option>
@@ -56,17 +55,16 @@
                     <div id="search_auto" style="background-color: white;opacity: 0.8;color: black;z-index: 102;position: fixed;width: 400px"></div>
                     <button class="send_information_header"><i class="fas fa-search fa-2x"></i></button>
                 </li>
-            </ul>
-            </nav>
-            <!-- menu -->
-            
-    </div>
-    <div id="panel_register" hidden>
-        <span id="user_login_close"><i class="fas fa-window-close fa-2x"></i></span>
-        <img id="img_logo" style="position:absolute;top:-27%;right:13%" src="./view/img/Logotipo500x500px.png"></img>
-        <?php
-            // include("login/view/login.html");
-            // include("login/view/register.html");
-        ?>
+                <li class="panel_user">
+                    <div id="default_panel" class="default_panel_user">
+                    </div>
+                </li>
     </div>
 </header>
+<div id="panel_register">
+    <span id="user_login_close"><i class="fas fa-window-close fa-2x"></i></span>
+    <?php
+        include( Login_view . "/login.html");
+        include( Login_view . "/register.html");
+    ?>
+</div>

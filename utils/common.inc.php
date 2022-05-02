@@ -36,4 +36,8 @@
             }
             throw new Exception();
         }
+        
+        public static function generate_token_secure($long){
+            return bin2hex(openssl_random_pseudo_bytes($long));
+        }
     }

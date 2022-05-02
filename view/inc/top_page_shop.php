@@ -19,6 +19,8 @@
 
     <script src="https://kit.fontawesome.com/ac5f7e1d46.js" crossorigin="anonymous"></script>
 	<script src="<?php echo LC ?>module/shop/view/js/shop.js"></script>
+	<script src="<?php echo LC ?>module/login/view/js/login.js"></script>
+	<script src="<?php echo LC ?>module/login/view/js/register.js"></script>
 	<script src="<?php echo LC ?>module/search/view/js/search.js"></script>
 	
 	<script src="<?php echo LC ?>view/js/main.js"></script>

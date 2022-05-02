@@ -23,6 +23,10 @@ p {
 .container {
   padding-left: 0px;
   margin-left: 0px;
+  width: 110%;
+}
+.col-md-12 {
+  width: 110%;
 }
 .container ul {
   display: inline-flex;
@@ -39,6 +43,18 @@ p {
   list-style: none;
   margin-left: 5px;
   width: 90%;
+}
+.container ul li.panel_user div.default_panel_user {
+  transform: skewX(30deg);
+  width: 200%;
+  color: white;
+  display: inline-flex;
+  flex-wrap: wrap;
+  
+}
+
+.container ul li.panel_user div.default_panel_user h3 {
+  margin-left: 10%;
 }
 
 .container ul li a {
@@ -133,14 +149,19 @@ li.search_inputs i, li.search_inputs select , li.search_inputs_text input {
 }
 div#panel_register {
   width: 60%;
-  height: 100%;
-  background-image: url('../view/img/fondo_login.jpg');
+  height: 60%;
+  background-image: url('../img/fondo_login.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   z-index: 150;
   position: fixed;
+  top:20%;
   color: white;
   right: 20%;
+
+}
+div#panel_register p {
+  color:white;
 }
 div#panel_register input {
   border: red 1px solid;
@@ -148,6 +169,29 @@ div#panel_register input {
   background-color: #363636;
   margin: 2% 0%;
   width: 45%;
+  padding: 1%;
+}
+div#panel_register input#register_google {
+  background-color: #db4a39;
+  border-radius: 0%;
+  width: auto;
+  color: white;
+  font-size: 25px;
+  width: 20%;
+  padding: 2%;
+}
+div#panel_register input#register_github {
+  background-color: black;
+  border-radius: 0%;
+  width: auto;
+  color: white;
+  font-size: 25px;
+  width: 20%;
+  padding: 2%;
+}
+.fa-input {
+  font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
 }
 div#buttons_login input {
   color: white;

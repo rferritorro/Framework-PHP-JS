@@ -82,7 +82,15 @@
             define('Search_view', Module_search . 'view');
 
                 #Define js path of view
-                define('Contact_js', LC . 'module/search/view/js/');
+                define('Search_js', LC . 'module/search/view/js/');
+
+    #Define login module path
+
+    define('Module_login', Module . 'login/');
+
+       #view
+       define('Login_view', Module_login . 'view');
+
 
 #Define resources path
     define('Resources', ROOT . 'resources/');
