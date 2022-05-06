@@ -30,4 +30,20 @@
             // $response->success() && var_dump($response->getData());
             return true;
         }
+        public static function verify_email($data) {
+            $email["email"] = $data["email"];
+            $email["asunto"] = "Verificación de Auto Shell";
+            $path = "http://192.168.1.32/Proyecto_V.4-RafaFerri/home&registered&".$data['user_token'];
+            $email["mensaje"] = "<a href='$path'>Verifica<a/>";
+            mail::send_email($email);
+            return true;
+        }
+        public static function recover_email($data) {
+            $email["email"] = $data["email"];
+            $email["asunto"] = "Verificación de Auto Shell";
+            $path = "http://192.168.1.32/Proyecto_V.4-RafaFerri/home&recover";
+            $email["mensaje"] = "<a href='$path'>Change Password<a/>";
+            mail::send_email($email);
+            return true;
+        }
     }

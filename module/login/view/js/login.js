@@ -1,23 +1,16 @@
 
 function panel_user() {
-  $(document).on('click','#default_panel',function () {
+  $(document).on('click','#show_panel',function () {
     $('div#panel_register').attr('hidden',false);
     $('div.layer_user').attr('hidden',false);
 
   });
-  $(document).on('click','#logger_out',function () {
+  
+  $(document).on('click','#logout',function () {
     localStorage.removeItem('token');
-    ajaxPromise('login/controller/controller_login.php?option=logout', 
-    'POST', 'TEXT')
-    .then(function(data) {
-      if (data == "Out") {
-        toastr.info("User just finished session,wait a few seconds..");
-        setTimeout(window.location.reload(),5000);
-      }
-  
-    }).catch(function() {
-      window.location.href = "index.php?exceptions=controller&option=503";
-  
+    $.when(setTimeout(toastr.info("User just finished session,wait a few seconds.."),5000))
+    .then(element => {
+      window.location.reload();
     });
   });
 
@@ -28,6 +21,50 @@ function panel_user() {
 
   });
 
+}
+function change_password() {
+  $(document).on('click','#remind',function () {
+    $('div#login').empty();
+    $('<div></div>').attr({'id':'panel_password'}).appendTo('div#login');
+    $('<h3></h3>').html("Write your email").appendTo('#panel_password');
+    $('<input></input>').attr({'id':'mail_2','type':'email','placeholder':'Email'}).appendTo('#panel_password');
+    $('<br />').appendTo('#panel_password');
+    $('<input></input>').attr({'id':'send_email','type':'button','value':'Recover','style':'background-color:red;color:white;border:none'}).appendTo('#panel_password');
+  });
+  $(document).on('click','#send_email',function () {
+    var value = document.getElementById('mail_2').value;
+
+    var regex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+.)+[A-Z]{2,4}$/i;
+    var result = regex.test(value);
+    if (result) {
+      var data = {"email": value};
+      ajaxPromise(friendlyURL('?page=login&op=check_mail'), 
+      'POST', 'JSON',data)
+      .then(function(check) {
+        if (check) {
+          ajaxPromise(friendlyURL('?page=login&op=recover_mail'), 
+          'POST', 'JSON',data)
+          .then(function(check) {
+            if (check) {
+              toastr.info("Revise your mail to change password");
+            } else {
+              toastr.error("There was an error in the process to change your password");
+            }
+          }).catch(function(info) {
+            // window.location.href = "index.php?exceptions=controller&option=503";
+            console.log(info);
+          });
+        } else {
+          toastr.error("Email doens't exist or is vinculated with Google and Github");
+        };
+      }).catch(function(info) {
+        // window.location.href = "index.php?exceptions=controller&option=503";
+        console.log(info);
+      });
+    } else {
+      toastr.error("Email ins't correct");
+    }
+  });
 }
 function validator_log(check) {
   var boolean = true;
@@ -86,11 +123,11 @@ function give_data_login() {
       if (element == false) {
         console.log("Error");
       } else {
-        ajaxPromise('login/controller/controller_login.php?option=login', 
+        ajaxPromise(friendlyURL('?page=login&op=logg-user'), 
         'POST', 'JSON',data)
         .then(function(data) {
           if (data == 0) {
-            toastr.error("Username doesn't exist");
+            toastr.error("Username doesn't exist or is not activate");
           } else if ( data == 1) {
             toastr.error("Password isn't correct");
           } else {
@@ -99,9 +136,9 @@ function give_data_login() {
           setTimeout(window.location.reload(),5000);
           }
          console.log(data);
-        }).catch(function() {
-          window.location.href = "index.php?exceptions=controller&option=503";
-      
+        }).catch(function(info) {
+          // window.location.href = "index.php?exceptions=controller&option=503";
+          console.log(info);
         });
       }
     });
@@ -110,4 +147,5 @@ function give_data_login() {
 $(document).ready(function () {
    panel_user();
    give_data_login();
+   change_password();
 });

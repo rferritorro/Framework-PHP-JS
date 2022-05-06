@@ -17,5 +17,18 @@ class login_model {
         function get_register($args) {
             return $this->bll->get_register_BLL($args);
         }
+
+        function get_newuser($args) {
+            return $this->bll->get_newuser_BLL($args);
+        }
+        function get_log($args) {
+            return $this->bll->get_log_BLL($args);
+        }
+        function get_charge_user($args) {
+            return $this->bll->get_charge_user_BLL($args);
+        }
+        function get_check_mail($args) {
+            return $this->bll->get_check_mail_BLL($args);
+        }
 }
 ?>

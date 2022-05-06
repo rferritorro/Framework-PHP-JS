@@ -94,7 +94,7 @@
           console.log("Error");
         } else {
          
-          ajaxPromise(friendlyURL('?page=login&op=register'), 
+          ajaxPromise(friendlyURL('?page=register&op=register'), 
           'POST', 'JSON',data)
           .then(function(check_user) {
            
@@ -102,20 +102,57 @@
               toastr.error("Username has already been registered");
             } else if (check_user == 1) {
               toastr.error("Email has already been registered");
-            } else {
-              console.log(check_user);
-              //localStorage.setItem('token',JSON.stringify(check_user));
-              //window.location.reload();
+            } else if (check_user == 2) {
+              toastr.error("There is an error");
+            }else {
+              toastr.info("Se ha enviado un correo de verificación");
+              var obj = {
+                user_token: check_user[0],
+                email: check_user[1]
+              }
+
+              ajaxPromise(friendlyURL('?page=register&op=sendverify'), 
+              'POST', 'JSON',obj)
+              .then(function(info) {                
+                console.log(info);
+              }).catch(function(info) {
+                // window.location.href = "index.php?exceptions=controller&option=503";        
+                console.log(info);
+              });
+            
             };
           }).catch(function(info) {
             // window.location.href = "index.php?exceptions=controller&option=503";        
             console.log(info);
           });
+
         }
       });
     });
   }
+function register_user(token_user) {
+  var data = {"token": token_user};
+  ajaxPromise(friendlyURL('?page=register&op=newuser'), 
+  'POST', 'JSON',data)
+  .then(function(info) {
+    window.location.href = "http://192.168.1.32/Proyecto_V.4-RafaFerri/home";
+  }).catch(function(info) {
+    // window.location.href = "index.php?exceptions=controller&option=503";        
+    console.log(info);
+  });
+}
+function load_content() {
+
+  var path = window.location.pathname.split('/');
+    path = path[2].split('&');
+  
+  if(path[1] === 'registered'){
+    register_user(path[2]);
+  }
+}
+  
   $(document).ready(function () {
     give_data_register();
     social_button();
+    load_content();
   });

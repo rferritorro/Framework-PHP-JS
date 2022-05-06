@@ -19,4 +19,17 @@
 		public function get_register_BLL($args) {
 			return $this -> dao -> select_data_register($this->db,$args[0],$args[1],$args[2]);
 		}
+
+		public function get_newuser_BLL($args) {
+			return $this -> dao -> select_new_user($this->db,$args[0]);
+		}
+		public function get_log_BLL($args) {
+			return $this -> dao -> select_logg_user($this->db,$args[0],$args[1]);
+		}
+		public function get_charge_user_BLL($args) {
+			return $this -> dao -> select_charge_user($this->db,$args[0]);
+		}
+		public function get_check_mail_BLL($args) {
+			return $this -> dao -> select_check_mail($this->db,$args[0]);
+		}
     }

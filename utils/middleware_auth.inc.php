@@ -4,7 +4,7 @@ class middleware_auth {
 
         $ini_array = parse_ini_file(Utils . 'secret.ini');
         
-        require_once Login_view . '/inc/JWT.php';
+        require_once Model . 'jwt.class.php';
         
         $secret = $ini_array["secret"];
         
@@ -13,6 +13,7 @@ class middleware_auth {
         
         $json = $JWT->decode($token, $secret);  
         $json = json_decode($json, true);
+
         if ($option == 1) {
             $json = $json["exp"];
         } else {

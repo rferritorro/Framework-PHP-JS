@@ -4,4 +4,32 @@
         <name>register</name>
         <uri>register</uri>
     </function>
+      <function>
+        <name>sendverify</name>
+        <uri>sendverify</uri>
+    </function>
+    <function>
+        <name>regret</name>
+        <uri>regret</uri>
+    </function>
+      <function>
+        <name>newuser</name>
+        <uri>newuser</uri>
+    </function>
+    <function>
+        <name>logger</name>
+        <uri>logg-user</uri>
+    </function>
+    <function>
+        <name>chargeuser</name>
+        <uri>charge-user</uri>
+    </function>  
+    <function>
+        <name>checkermail</name>
+        <uri>check_mail</uri>
+    </function>
+     <function>
+        <name>sendrecover</name>
+        <uri>recover_mail</uri>
+    </function>
 </functions>
