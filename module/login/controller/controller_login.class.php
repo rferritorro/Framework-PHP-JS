@@ -27,4 +27,7 @@ class controller_login {
     function checkermail() {
       echo json_encode(common::load_model('login_model', 'get_check_mail',[$_POST["email"]]));
     }
+    function setnewpassword() {
+      echo json_encode(common::load_model('login_model', 'get_set_new_password',[$_POST["password"],$_POST["token"]]));
+    }
 }

@@ -8,10 +8,9 @@ function panel_user() {
   
   $(document).on('click','#logout',function () {
     localStorage.removeItem('token');
-    $.when(setTimeout(toastr.info("User just finished session,wait a few seconds.."),5000))
-    .then(element => {
-      window.location.reload();
-    });
+    toastr.info("User just finished session,wait a few seconds..");
+    setTimeout(() => {  window.location.reload()},3000);
+
   });
 
   $(document).on('click','#user_login_close',function () {
@@ -32,6 +31,7 @@ function change_password() {
     $('<input></input>').attr({'id':'send_email','type':'button','value':'Recover','style':'background-color:red;color:white;border:none'}).appendTo('#panel_password');
   });
   $(document).on('click','#send_email',function () {
+
     var value = document.getElementById('mail_2').value;
 
     var regex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+.)+[A-Z]{2,4}$/i;
@@ -41,15 +41,15 @@ function change_password() {
       ajaxPromise(friendlyURL('?page=login&op=check_mail'), 
       'POST', 'JSON',data)
       .then(function(check) {
+        
         if (check) {
+          var mail = { "email": value,"token": check};
           ajaxPromise(friendlyURL('?page=login&op=recover_mail'), 
-          'POST', 'JSON',data)
+          'POST', 'JSON',mail)
           .then(function(check) {
-            if (check) {
-              toastr.info("Revise your mail to change password");
-            } else {
-              toastr.error("There was an error in the process to change your password");
-            }
+
+            (check) ? toastr.info("Revise your mail to change password") : toastr.error("There was an error in the process to change your password");
+
           }).catch(function(info) {
             // window.location.href = "index.php?exceptions=controller&option=503";
             console.log(info);
@@ -133,8 +133,8 @@ function give_data_login() {
           } else {
             localStorage.setItem('token',JSON.stringify(data));
           toastr.info("User has logged");
-          setTimeout(window.location.reload(),5000);
-          }
+          setTimeout(() => {window.location.reload()},3000);
+        }
          console.log(data);
         }).catch(function(info) {
           // window.location.href = "index.php?exceptions=controller&option=503";
@@ -144,8 +144,68 @@ function give_data_login() {
     });
   });
 }
+
+function new_password(token) {
+  $('div#panel_register').attr('hidden',false);
+  $('div.layer_user').attr('hidden',false);
+  $('div#login').empty();
+  $('<div></div>').attr({'id':'panel_password'}).appendTo('div#login');
+  $('<h1></h1>').html("Write your new password").appendTo('#panel_password');
+  $('<input></input>').attr({'id':'password_2','type':'password','placeholder':'Password'}).appendTo('#panel_password');
+  $('<br />').appendTo('#panel_password');
+  $('<input></input>').attr({'id':'confirm_2','type':'password','placeholder':'Confirm'}).appendTo('#panel_password');
+  $('<br />').appendTo('#panel_password');
+  $('<input></input>').attr({'id':'change_password','type':'button','value':'Change','style':'background-color:red;color:white;border:none'}).appendTo('#panel_password');
+  check_password_and_send(token);
+}
+
+function check_password_and_send(token) {
+  $(document).on('click','#change_password',function () {
+    var password = document.getElementById('password_2').value;
+    var Confirm = document.getElementById('confirm_2').value;
+
+    var regex = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
+    var result = regex.test(password);
+
+    if (result) {
+      if (password == Confirm) {
+        var data = {"password": password,"token": token};
+        ajaxPromise(friendlyURL('?page=login&op=set_new_password'), 
+        'POST', 'JSON',data)
+        .then(function(data) {
+          if (data) {
+            
+            toastr.success("Password has been changed correctly");
+            setTimeout(() => {window.location.href = "http://localhost/Proyecto_V.4-RafaFerri/home"},3000);
+          } else {
+            toastr.success("an error has occured"); 
+          }
+        }).catch(function(info) {
+          // window.location.href = "index.php?exceptions=controller&option=503";
+          console.log(info);
+        });
+
+      } else {
+        toastr.error("Password and Confirm password aren't the same");
+      }
+    } else {
+    toastr.error("Password isn't correct");
+    }
+  });
+}
+function load_contented() {
+
+  var path = window.location.pathname.split('/');
+    path = path[2].split('&');
+  
+  if(path[1] === 'recover'){
+    
+    new_password(path[2]);
+  }
+}
 $(document).ready(function () {
    panel_user();
    give_data_login();
    change_password();
+   load_contented();
 });

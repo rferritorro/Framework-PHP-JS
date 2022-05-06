@@ -89,16 +89,32 @@
 
         function select_check_mail($db,$email) {
 
-            $sql = "SELECT * FROM User WHERE email = '$email' AND activate = 1 AND token NOT LIKE 'Google%' AND token NOT LIKE 'Github%'";
+            $sql = "SELECT token FROM User WHERE email = '$email' AND activate = 1 AND token NOT LIKE 'Google%' AND token NOT LIKE 'Github%'";
             $stmt = $db->ejecutar($sql);
+            $token = $db->listar($stmt);
+            $token = $token[0]["token"];
             $row_select = $stmt->num_rows;
             if ($row_select == 1) {
                 $sql = "UPDATE User SET activate = 0 WHERE email = '$email'";
                 $stmt = $db->ejecutar($sql);
-                return true;
+                return $token;
             } else {
                 return false;
             }
 
+        }
+        function select_new_password($db,$password,$token) {
+            $sql = "SELECT * FROM User WHERE token = '$token' AND activate = 0";
+            $stmt = $db->ejecutar($sql);
+           
+            $row_select = $stmt->num_rows;
+            if ($row_select == 1) {
+                    $password = password_hash($password,PASSWORD_DEFAULT);
+                    $sql = "UPDATE User SET activate = 1 ,password = '$password' WHERE token = '$token'";
+                    $stmt = $db->ejecutar($sql);
+                    return true;
+            } else {
+                return false;
+            }
         }
     }

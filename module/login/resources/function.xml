@@ -32,4 +32,8 @@
         <name>sendrecover</name>
         <uri>recover_mail</uri>
     </function>
+      <function>
+        <name>setnewpassword</name>
+        <uri>set_new_password</uri>
+    </function>
 </functions>

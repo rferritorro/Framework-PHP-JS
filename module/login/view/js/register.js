@@ -141,6 +141,7 @@ function register_user(token_user) {
     console.log(info);
   });
 }
+
 function load_content() {
 
   var path = window.location.pathname.split('/');

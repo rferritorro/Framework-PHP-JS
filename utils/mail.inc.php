@@ -41,7 +41,7 @@
         public static function recover_email($data) {
             $email["email"] = $data["email"];
             $email["asunto"] = "Verificación de Auto Shell";
-            $path = "http://192.168.1.32/Proyecto_V.4-RafaFerri/home&recover";
+            $path = "http://localhost/Proyecto_V.4-RafaFerri/home&recover&".$data['token'];
             $email["mensaje"] = "<a href='$path'>Change Password<a/>";
             mail::send_email($email);
             return true;
