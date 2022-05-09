@@ -44,8 +44,10 @@ function load_user(token) {
     ajaxPromise(friendlyURL('?page=login&op=charge-user'), 
     'POST', 'JSON',data)
     .then(function(data) {
-        $('<img></img>').attr({'src':data[0].avatar}).appendTo('div#default_panel');
-        $('<h3></h3>').html(data[0].username+'#'+data[0].uid).appendTo('#default_panel');
+        $('<div></div>').attr({'id':'perfil'}).appendTo('div#default_panel')
+        $('<img></img>').attr({'src':data[0].avatar}).appendTo('#perfil');
+        $('<br />').appendTo('#perfil');
+        $('<h3></h3>').html(data[0].uid).appendTo('#perfil');
         $('<i></i>').attr({'id':'logout','class':'fa fa-door-open fa-3x'}).appendTo('div#default_panel');    
     }).catch(function(info) {
       // window.location.href = "index.php?exceptions=controller&option=503";

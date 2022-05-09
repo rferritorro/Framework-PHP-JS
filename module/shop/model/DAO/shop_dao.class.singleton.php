@@ -170,4 +170,24 @@
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
         }
+        function change_like($db,$car_id,$color,$token) {
+            $username = middleware_auth::decode_jwt($token);
+
+            if ( $color == 0) {
+                $sql = "INSERT INTO `like`(user,car) VALUES ('$username','$car_id')";
+            } else if ( $color == 1) {
+                $sql = "DELETE FROM `like` WHERE user='$username' AND car='$car_id'";
+            } else {
+                return "error";
+            }
+            $db->ejecutar($sql);
+            return true;
+        }
+        function charge_all_likes($db,$token) {
+            
+            $username = middleware_auth::decode_jwt($token);
+            $sql = "SELECT car FROM `like` WHERE user='$username'";
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
     }

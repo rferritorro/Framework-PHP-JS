@@ -21,6 +21,14 @@
         <uri>count</uri>
     </function>
     <function>
+        <name>like</name>
+        <uri>like</uri>
+    </function>
+    <function>
+        <name>userlikes</name>
+        <uri>charge_all_likes</uri>
+    </function>
+    <function>
         <name>redireccionamiento</name>
         <uri>redirect</uri>
     </function>

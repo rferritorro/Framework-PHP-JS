@@ -16,13 +16,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 	<script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+	<script src="https://cdn.auth0.com/js/auth0/9.2.2/auth0.min.js"></script>
 
     <script src="https://kit.fontawesome.com/ac5f7e1d46.js" crossorigin="anonymous"></script>
 	<script src="<?php echo LC ?>module/shop/view/js/shop.js"></script>
 	<script src="<?php echo LC ?>module/login/view/js/login.js"></script>
 	<script src="<?php echo LC ?>module/login/view/js/register.js"></script>
 	<script src="<?php echo LC ?>module/search/view/js/search.js"></script>
-	
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<meta name="google-signin-client_id" content="153438092259-vp77go4l9itfao78ttnumie627nis2vn.apps.googleusercontent.com">
+
 	<script src="<?php echo LC ?>view/js/main.js"></script>
 	
 	<script src="<?php echo LC ?>utils/slick-1.8.1/slick/slick.js"></script>

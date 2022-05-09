@@ -65,14 +65,37 @@
   
     return boolean;
   }
-  function social_button() {
-    $(document).on('click','#register_google',function () {
-      console.log("google");
-    });
-    $(document).on('click','#register_github',function () {
-      console.log("git");
-    });
-  }
+  // function social_button() {
+
+  //   var Auth = new auth0.WebAuth({
+  //     domain: 'dev-irl581xs.us.auth0.com',
+  //     clientID: '7q4vjPkTYlIw0Svb1iF9MDdvgLYwBduU',
+  //     redirectUri: 'http://localhost/Proyecto_V.4-RafaFerri/',
+  //     audience: 'https://' + 'dev-irl581xs.us.auth0.com' + '/userinfo',
+  //     responseType: 'token id_token',
+  //     scope: 'openid profile email',
+  //     leeway: 60
+  //   });
+
+  //   $(document).on('click','#register_google',function () {
+  //     onSignIn(Auth);
+  //   });
+  //   $(document).on('click','#register_github',function () {
+    
+  //     function_social(Auth,'Github');
+  //   });
+  // }
+
+  
+   
+  //   function onSignIn(googleUser) {
+  //     var profile = googleUser.getBasicProfile();
+  //     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  //     console.log('Name: ' + profile.getName());
+  //     console.log('Image URL: ' + profile.getImageUrl());
+  //     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  //   }
+  
   function give_data_register() {
   
     $(document).on('click','#register_button',function () {
@@ -151,9 +174,9 @@ function load_content() {
     register_user(path[2]);
   }
 }
-  
+
   $(document).ready(function () {
     give_data_register();
-    social_button();
+    // social_button();
     load_content();
   });

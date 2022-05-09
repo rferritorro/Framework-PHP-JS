@@ -174,7 +174,7 @@ function select_all_cars(index = 0) {
 
             ciudades.push({lat:data[row].lat,long:data[row].long,city:data[row].ciudad,img:data[row].img});
 
-            charge_all_likes(); //No carga al hacer pagination
+            charge_all_likes();
         }
             $('<div></div>').attr({'id':'map','style':'width:100%;height:100%'}).appendTo('#map_cars');
             map_array(ciudades);
@@ -239,17 +239,18 @@ function charge_all_likes() {
     var token = JSON.parse(localStorage.getItem('token'));
     if (token) {
         var data = {"info_token":token};
-        ajaxPromise('shop/controller/controller_shop.php?option=charge_all_likes','POST','JSON',data)
+        ajaxPromise(friendlyURL('?page=shop&op=charge_all_likes')
+        ,'POST','JSON',data)
         .then(function(data) {
             for (i in data) {
                 $('div#div-'+data[i].car+' i#like').css('color','red');
                 $('div#div-'+data[i].car+' i#like').attr('data-colour','1');
             }
-        }).catch(function() {
-            window.location.href = "index.php?exceptions=controller&option=503";
+        }).catch(function(info) {
+            // window.location.href = "index.php?exceptions=controller&option=503";
+            console.log(info);
         });  
     }
-    
 }
 
 //Details
@@ -367,7 +368,8 @@ function load_filters() {
                             $('<option></option>').attr({'id':'id'+model[row].id,'class':'option_brand','value':model[row].model_car}).html(model[row].model_car).appendTo('#select_model');
                         }
                         }).catch(function() {
-                        window.location.href = "index.php?exceptions=controller&option=503";
+                        // window.location.href = "index.php?exceptions=controller&option=503";
+                        console.log(info);
                     });
             }
         });
@@ -592,8 +594,9 @@ function like() {
             ajaxPromise(friendlyURL('?page=shop&op=like'),'POST','TEXT',data)
             .then(function(check) {
             console.log(check);
-            }).catch(function() {
-                window.location.href = "index.php?exceptions=controller&option=503";
+            }).catch(function(info) {
+                // window.location.href = "index.php?exceptions=controller&option=503";
+                console.log(info);
             });   
 
             if (this.getAttribute('data-colour') == 0) {
@@ -642,8 +645,8 @@ $(window).on("load", function (e) {
         order_change();
         button_pagination();
         redirect_more_cars();
-        // like();
-        // like_detail();
+        like();
+        like_detail();
     });
 
 })

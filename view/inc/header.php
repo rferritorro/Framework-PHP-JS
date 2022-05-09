@@ -61,7 +61,7 @@
                 </li>
     </div>
 </header>
-<div id="panel_register">
+<div id="panel_register" hidden>
     <span id="user_login_close"><i class="fas fa-window-close fa-2x"></i></span>
     <?php
         include( Login_view . "/login.html");
