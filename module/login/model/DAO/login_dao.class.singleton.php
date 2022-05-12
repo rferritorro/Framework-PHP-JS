@@ -103,7 +103,7 @@
             }
 
         }
-        function select_new_password($db,$password,$token) {
+        function select_new_password($db,$password,$token,$type) {
             $sql = "SELECT * FROM User WHERE token = '$token' AND activate = 0";
             $stmt = $db->ejecutar($sql);
            
@@ -113,6 +113,40 @@
                     $sql = "UPDATE User SET activate = 1 ,password = '$password' WHERE token = '$token'";
                     $stmt = $db->ejecutar($sql);
                     return true;
+            } else {
+                return false;
+            }
+        }
+        function select_data_social_register($db,$user,$email,$token,$type) {
+            $sql = "SELECT * FROM User WHERE token = '$token'";
+            $stmt = $db->ejecutar($sql);
+
+            $row_select = $stmt->num_rows;
+            if ($row_select == 0) {
+                $uid= common::generate_token_secure(4);
+                if ($type == "google") {
+                    $uid = "G-". $uid;
+                } else if ($type == "github") {
+                    $uid = "git-". $uid;
+                }
+                $avatar = "https://robohash.org/".$user;
+                $sql = "INSERT INTO User(username,password,email,type,avatar,UID,activate,token) VALUES ('$user','null','$email',0,'$avatar','$uid',false,'$token')";
+                $db->ejecutar($sql);
+
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function select_data_social_login($db,$token) {
+            $sql = "SELECT username FROM User WHERE token = '$token'";
+            $stmt = $db->ejecutar($sql);
+
+            $row_select = $stmt->num_rows;
+            if ($row_select == 1) {
+                $username = $db->listar($stmt);
+                $username = $username[0]["username"];
+                return middleware_auth::encode_jwt($username);
             } else {
                 return false;
             }

@@ -65,37 +65,63 @@
   
     return boolean;
   }
-  // function social_button() {
+  function social_button() {
 
-  //   var Auth = new auth0.WebAuth({
-  //     domain: 'dev-irl581xs.us.auth0.com',
-  //     clientID: '7q4vjPkTYlIw0Svb1iF9MDdvgLYwBduU',
-  //     redirectUri: 'http://localhost/Proyecto_V.4-RafaFerri/',
-  //     audience: 'https://' + 'dev-irl581xs.us.auth0.com' + '/userinfo',
-  //     responseType: 'token id_token',
-  //     scope: 'openid profile email',
-  //     leeway: 60
-  //   });
+    //Al tener dos js (login/register) ,solo puede crear un objeto auth, entonces funciona o 1 o el otro.
 
-  //   $(document).on('click','#register_google',function () {
-  //     onSignIn(Auth);
-  //   });
-  //   $(document).on('click','#register_github',function () {
+    // var webAuth = new auth0.WebAuth({
+    //   domain:       'dev-irl581xs.us.auth0.com',
+    //   clientID:     '7q4vjPkTYlIw0Svb1iF9MDdvgLYwBduU',
+    //   audience: 'https://' + 'dev-irl581xs.us.auth0.com' + '/userinfo',
+    //   responseType: "token",
+    //   scope: "openid profile email",
+    //   redirectUri: "http://localhost/Proyecto_V.4-RafaFerri/home"
+    // });
     
-  //     function_social(Auth,'Github');
-  //   });
-  // }
+    $(document).on('click','#register_google',function () {
+      webAuth.authorize({
+        connection: 'google-oauth2'
+      })
+      localStorage.setItem('social_type', 'google');
+    });
+    $(document).on('click','#register_github',function () {
+      webAuth.authorize({
+        connection: 'github'
+      });
+      localStorage.setItem('social_type', 'github');
+    });
+    
+    // webAuth.parseHash(function(err, authResult) {
+    //   if (authResult) {
+    //     webAuth.client.userInfo(authResult.accessToken, function(err, profile) {
 
-  
-   
-  //   function onSignIn(googleUser) {
-  //     var profile = googleUser.getBasicProfile();
-  //     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-  //     console.log('Name: ' + profile.getName());
-  //     console.log('Image URL: ' + profile.getImageUrl());
-  //     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-  //   }
-  
+    //     profile.type = localStorage.getItem('social_type');
+    //     localStorage.removeItem('social_type');
+
+    //       ajaxPromise(friendlyURL('?page=register&op=social_register'), 
+    //       'POST', 'JSON',profile)
+    //       .then(function(check_user) {
+    //         if (check_user) {
+    //           toastr.success("Se ha registrado correctamente");
+    //           setTimeout(() => {window.location.href="http://localhost/Proyecto_V.4-RafaFerri/home"},3000);
+    //         } else {
+    //           toastr.error("El usuario ya esta registrado");
+    //           setTimeout(() => {window.location.href="http://localhost/Proyecto_V.4-RafaFerri/home"},3000);
+    //         }
+    //       }).catch(function(info) {
+    //         // window.location.href = "index.php?exceptions=controller&option=503";        
+    //         console.log(info);
+    //       });
+    //     });    
+    //   } else if (err) {
+       
+    //     console.log(err);
+    //     alert('Error: ' + err.error + '. Check the console for further details.');
+    //   }
+    // });
+  }
+
+ 
   function give_data_register() {
   
     $(document).on('click','#register_button',function () {
@@ -158,7 +184,7 @@ function register_user(token_user) {
   ajaxPromise(friendlyURL('?page=register&op=newuser'), 
   'POST', 'JSON',data)
   .then(function(info) {
-    window.location.href = "http://192.168.1.32/Proyecto_V.4-RafaFerri/home";
+    window.location.href = "http://localhost/Proyecto_V.4-RafaFerri/home";
   }).catch(function(info) {
     // window.location.href = "index.php?exceptions=controller&option=503";        
     console.log(info);
@@ -169,14 +195,14 @@ function load_content() {
 
   var path = window.location.pathname.split('/');
     path = path[2].split('&');
-  
   if(path[1] === 'registered'){
     register_user(path[2]);
   }
+ 
 }
 
   $(document).ready(function () {
     give_data_register();
-    // social_button();
+    social_button();
     load_content();
   });

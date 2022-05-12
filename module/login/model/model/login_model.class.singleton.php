@@ -30,6 +30,12 @@ class login_model {
         function get_check_mail($args) {
             return $this->bll->get_check_mail_BLL($args);
         }
+        function get_social_register($args) {
+            return $this->bll->get_social_register_BLL($args);
+        }
+        function get_social_login($args) {
+            return $this->bll->get_social_login_BLL($args);
+        }
         function get_set_new_password($args) {
             return $this->bll->get_set_new_password_BLL($args);
         }

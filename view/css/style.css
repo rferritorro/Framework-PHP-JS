@@ -126,8 +126,9 @@ li.search_inputs {
 }
 
 li.search_inputs_text {
-  width: 33%;
+  width: 30%;
   padding: 0.5%;
+
 }
 
 li.search_inputs_text input{
@@ -180,7 +181,7 @@ div#panel_register input {
   width: 45%;
   padding: 1%;
 }
-div#panel_register input#register_google {
+div#panel_register input#register_google,div#panel_register input#login_google {
   background-color: #db4a39;
   border-radius: 0%;
   width: auto;
@@ -189,7 +190,7 @@ div#panel_register input#register_google {
   width: 20%;
   padding: 2%;
 }
-div#panel_register input#register_github {
+div#panel_register input#register_github,div#panel_register input#login_github {
   background-color: black;
   border-radius: 0%;
   width: auto;

@@ -32,6 +32,14 @@
         <name>sendrecover</name>
         <uri>recover_mail</uri>
     </function>
+    <function>
+        <name>socialregister</name>
+        <uri>social_register</uri>
+    </function>
+    <function>
+        <name>sociallogin</name>
+        <uri>social_login</uri>
+    </function>
       <function>
         <name>setnewpassword</name>
         <uri>set_new_password</uri>

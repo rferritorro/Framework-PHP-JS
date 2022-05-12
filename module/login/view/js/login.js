@@ -203,9 +203,61 @@ function load_contented() {
     new_password(path[2]);
   }
 }
+
+function social_login() {
+  var webAuth = new auth0.WebAuth({
+    domain:       'dev-irl581xs.us.auth0.com',
+    clientID:     '7q4vjPkTYlIw0Svb1iF9MDdvgLYwBduU',
+    audience: 'https://' + 'dev-irl581xs.us.auth0.com' + '/userinfo',
+    responseType: "token",
+    scope: "openid profile email",
+    redirectUri: "http://localhost/Proyecto_V.4-RafaFerri/home"
+  });
+  
+  $(document).on('click','#login_google',function () {
+    webAuth.authorize({
+      connection: 'google-oauth2'
+    })
+  });
+  $(document).on('click','#login_github',function () {
+    webAuth.authorize({
+      connection: 'github'
+    });
+  });
+  webAuth.parseHash(function(err, authResult) {
+    console.log(authResult);
+    if (authResult) {
+      webAuth.client.userInfo(authResult.accessToken, function(err, profile) {
+
+        ajaxPromise(friendlyURL('?page=login&op=social_login'), 
+        'POST', 'JSON',profile)
+        .then(function(check_user) {
+
+          if (check_user) {
+             toastr.success("Se ha logeado correctamente");
+             localStorage.setItem('token',JSON.stringify(check_user));
+            setTimeout(() => {window.location.href="http://localhost/Proyecto_V.4-RafaFerri/home"},2000);
+          } else {
+            toastr.error("El usuario no existe");
+            setTimeout(() => {window.location.href="http://localhost/Proyecto_V.4-RafaFerri/home"},2000);
+          }
+        }).catch(function(info) {
+          // window.location.href = "index.php?exceptions=controller&option=503";        
+          console.log(info);
+        });
+      });    
+    } else if (err) {
+     
+      console.log(err);
+      alert('Error: ' + err.error + '. Check the console for further details.');
+    }
+  });
+}
+
 $(document).ready(function () {
    panel_user();
    give_data_login();
+  social_login();
    change_password();
    load_contented();
 });

@@ -32,6 +32,12 @@
 		public function get_check_mail_BLL($args) {
 			return $this -> dao -> select_check_mail($this->db,$args[0]);
 		}
+		public function get_social_register_BLL($args) {
+			return $this -> dao -> select_data_social_register($this->db,$args[0],$args[1],$args[2],$args[3]);
+		}
+		public function get_social_login_BLL($args) {
+			return $this -> dao -> select_data_social_login($this->db,$args[0]);
+		}
 		public function get_set_new_password_BLL($args) {
 			return $this -> dao -> select_new_password($this->db,$args[0],$args[1]);
 		}

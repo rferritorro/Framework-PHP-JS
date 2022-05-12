@@ -51,8 +51,8 @@
                     </select>
                 </li>
                 <li class="search_inputs_text">                        
-                    <input type="text" id="autocom" maxlength="20" style="width: 350px;" autocomplete="off"/>
-                    <div id="search_auto" style="background-color: white;opacity: 0.8;color: black;z-index: 102;position: fixed;width: 400px"></div>
+                    <input type="text" id="autocom" maxlength="20" style="width: 300px;" autocomplete="off"/>
+                    <div id="search_auto" style="background-color: white;opacity: 0.8;color: black;z-index: 102;position: fixed;width: 150px"></div>
                     <button class="send_information_header"><i class="fas fa-search fa-2x"></i></button>
                 </li>
                 <li class="panel_user">
