@@ -67,16 +67,15 @@
   }
   function social_button() {
 
-    //Al tener dos js (login/register) ,solo puede crear un objeto auth, entonces funciona o 1 o el otro.
 
-    // var webAuth = new auth0.WebAuth({
-    //   domain:       'dev-irl581xs.us.auth0.com',
-    //   clientID:     '7q4vjPkTYlIw0Svb1iF9MDdvgLYwBduU',
-    //   audience: 'https://' + 'dev-irl581xs.us.auth0.com' + '/userinfo',
-    //   responseType: "token",
-    //   scope: "openid profile email",
-    //   redirectUri: "http://localhost/Proyecto_V.4-RafaFerri/home"
-    // });
+    var webAuth = new auth0.WebAuth({
+      domain:       'dev-irl581xs.us.auth0.com',
+      clientID:     '7q4vjPkTYlIw0Svb1iF9MDdvgLYwBduU',
+      audience: 'https://' + 'dev-irl581xs.us.auth0.com' + '/userinfo',
+      responseType: "token",
+      scope: "openid profile email",
+      redirectUri: "http://localhost/Proyecto_V.4-RafaFerri/home"
+    });
     
     $(document).on('click','#register_google',function () {
       webAuth.authorize({
@@ -91,34 +90,38 @@
       localStorage.setItem('social_type', 'github');
     });
     
-    // webAuth.parseHash(function(err, authResult) {
-    //   if (authResult) {
-    //     webAuth.client.userInfo(authResult.accessToken, function(err, profile) {
+    webAuth.parseHash(function(err, authResult) {
+      if (authResult) {
+        webAuth.client.userInfo(authResult.accessToken, function(err, profile) {
 
-    //     profile.type = localStorage.getItem('social_type');
-    //     localStorage.removeItem('social_type');
+        profile.type = localStorage.getItem('social_type');
+        localStorage.removeItem('social_type');
 
-    //       ajaxPromise(friendlyURL('?page=register&op=social_register'), 
-    //       'POST', 'JSON',profile)
-    //       .then(function(check_user) {
-    //         if (check_user) {
-    //           toastr.success("Se ha registrado correctamente");
-    //           setTimeout(() => {window.location.href="http://localhost/Proyecto_V.4-RafaFerri/home"},3000);
-    //         } else {
-    //           toastr.error("El usuario ya esta registrado");
-    //           setTimeout(() => {window.location.href="http://localhost/Proyecto_V.4-RafaFerri/home"},3000);
-    //         }
-    //       }).catch(function(info) {
-    //         // window.location.href = "index.php?exceptions=controller&option=503";        
-    //         console.log(info);
-    //       });
-    //     });    
-    //   } else if (err) {
+          ajaxPromise(friendlyURL('?page=register&op=social_register'), 
+          'POST', 'JSON',profile)
+          .then(function(check_user) {
+            if (check_user) {
+              toastr.success("Se ha registrado correctamente");
+            } else {
+              toastr.error("El usuario ya esta registrado");
+            }
+        
+            setTimeout(() => {
+              webAuth.logout({
+                returnTo: 'http://localhost/Proyecto_V.4-RafaFerri/home',
+                clientID: '7q4vjPkTYlIw0Svb1iF9MDdvgLYwBduU'
+              });            },3000);
+          }).catch(function(info) {
+            // window.location.href = "index.php?exceptions=controller&option=503";        
+            console.log(info);
+          });
+        });    
+      } else if (err) {
        
-    //     console.log(err);
-    //     alert('Error: ' + err.error + '. Check the console for further details.');
-    //   }
-    // });
+        console.log(err);
+        alert('Error: ' + err.error + '. Check the console for further details.');
+      }
+    });
   }
 
  
