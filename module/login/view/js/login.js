@@ -135,7 +135,6 @@ function give_data_login() {
           toastr.info("User has logged");
           setTimeout(() => {window.location.reload()},3000);
         }
-         console.log(data);
         }).catch(function(info) {
           // window.location.href = "index.php?exceptions=controller&option=503";
           console.log(info);
@@ -205,56 +204,61 @@ function load_contented() {
 }
 
 function social_login() {
-
+var client = true;
   //Al tener register y login separados,tengo que crear dos objetos auth para realizar la conexión y por eso peta:
-  // var webAuth = new auth0.WebAuth({
-  //   domain:       'dev-irl581xs.us.auth0.com',
-  //   clientID:     '7q4vjPkTYlIw0Svb1iF9MDdvgLYwBduU',
-  //   audience: 'https://' + 'dev-irl581xs.us.auth0.com' + '/userinfo',
-  //   responseType: "token",
-  //   scope: "openid profile email",
-  //   redirectUri: "http://localhost/Proyecto_V.4-RafaFerri/home"
-  // });
+  var webAuth = new auth0.WebAuth({
+    domain:       'dev-irl581xs.us.auth0.com',
+    clientID:     '7q4vjPkTYlIw0Svb1iF9MDdvgLYwBduU',
+    audience: 'https://' + 'dev-irl581xs.us.auth0.com' + '/userinfo',
+    responseType: "token",
+    scope: "openid profile email",
+    redirectUri: "http://192.168.1.32/Proyecto_V.4-RafaFerri/home"
+  });
   
   $(document).on('click','#login_google',function () {
     webAuth.authorize({
       connection: 'google-oauth2'
     })
+    localStorage.setItem('register_type', '1');
   });
   $(document).on('click','#login_github',function () {
     webAuth.authorize({
       connection: 'github'
     });
+    localStorage.setItem('register_type', '1');
   });
 
-  // webAuth.parseHash(function(err, authResult) {
-  //   console.log(authResult);
-  //   if (authResult) {
-  //     webAuth.client.userInfo(authResult.accessToken, function(err, profile) {
+if (localStorage.getItem('register_type') == 1) {
+  localStorage.removeItem('register_type');
 
-  //       ajaxPromise(friendlyURL('?page=login&op=social_login'), 
-  //       'POST', 'JSON',profile)
-  //       .then(function(check_user) {
+  webAuth.parseHash(function(err, authResult) {
+    if (authResult) {
 
-  //         if (check_user) {
-  //            toastr.success("Se ha logeado correctamente");
-  //            localStorage.setItem('token',JSON.stringify(check_user));
-  //           setTimeout(() => {window.location.href="http://localhost/Proyecto_V.4-RafaFerri/home"},2000);
-  //         } else {
-  //           toastr.error("El usuario no existe");
-  //           setTimeout(() => {window.location.href="http://localhost/Proyecto_V.4-RafaFerri/home"},2000);
-  //         }
-  //       }).catch(function(info) {
-  //         // window.location.href = "index.php?exceptions=controller&option=503";        
-  //         console.log(info);
-  //       });
-  //     });    
-  //   } else if (err) {
+      webAuth.client.userInfo(authResult.accessToken, function(err, profile) {
+
+        ajaxPromise(friendlyURL('?page=login&op=social_login'), 
+        'POST', 'JSON',profile)
+        .then(function(check_user) {
+
+          if (check_user) {
+             toastr.success("Se ha logeado correctamente");
+             localStorage.setItem('token',JSON.stringify(check_user));
+            setTimeout(() => {window.location.href="http://192.168.1.32/Proyecto_V.4-RafaFerri/home"},2000);
+          } else {
+            toastr.error("El usuario no existe");
+            setTimeout(() => {window.location.href="http://192.168.1.32/Proyecto_V.4-RafaFerri/home"},2000);
+          }
+        }).catch(function(info) {
+          // window.location.href = "index.php?exceptions=controller&option=503";        
+          console.log(info);
+        });
+      });    
+    } else if (err) {
      
-  //     console.log(err);
-  //     alert('Error: ' + err.error + '. Check the console for further details.');
-  //   }
-  // });
+      alert('Error: ' + err.error + '. Check the console for further details.');
+    }
+  });
+}
 }
 
 $(document).ready(function () {

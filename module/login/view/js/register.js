@@ -67,14 +67,14 @@
   }
   function social_button() {
 
-
+  var server = true;
     var webAuth = new auth0.WebAuth({
       domain:       'dev-irl581xs.us.auth0.com',
       clientID:     '7q4vjPkTYlIw0Svb1iF9MDdvgLYwBduU',
       audience: 'https://' + 'dev-irl581xs.us.auth0.com' + '/userinfo',
       responseType: "token",
       scope: "openid profile email",
-      redirectUri: "http://localhost/Proyecto_V.4-RafaFerri/home"
+      redirectUri: "http://192.168.1.32/Proyecto_V.4-RafaFerri/home"
     });
     
     $(document).on('click','#register_google',function () {
@@ -82,15 +82,22 @@
         connection: 'google-oauth2'
       })
       localStorage.setItem('social_type', 'google');
+      localStorage.setItem('register_type', '0');
+
     });
     $(document).on('click','#register_github',function () {
       webAuth.authorize({
         connection: 'github'
       });
       localStorage.setItem('social_type', 'github');
+      localStorage.setItem('register_type', '0');
     });
-    
-    webAuth.parseHash(function(err, authResult) {
+
+    if (localStorage.getItem('register_type') == 0) {
+      localStorage.removeItem('register_type');
+
+      webAuth.parseHash(function(err, authResult) {
+  
       if (authResult) {
         webAuth.client.userInfo(authResult.accessToken, function(err, profile) {
 
@@ -105,12 +112,7 @@
             } else {
               toastr.error("El usuario ya esta registrado");
             }
-        
-            setTimeout(() => {
-              webAuth.logout({
-                returnTo: 'http://localhost/Proyecto_V.4-RafaFerri/home',
-                clientID: '7q4vjPkTYlIw0Svb1iF9MDdvgLYwBduU'
-              });            },3000);
+            
           }).catch(function(info) {
             // window.location.href = "index.php?exceptions=controller&option=503";        
             console.log(info);
@@ -122,6 +124,7 @@
         alert('Error: ' + err.error + '. Check the console for further details.');
       }
     });
+  }
   }
 
  
